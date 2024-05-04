@@ -38,8 +38,8 @@ class BajaController extends Controller
     {
         //validacion del lado del servidor
         $request->validate([
-            'cantidad' => 'required',
-            'motivo' => 'required',
+            'cantidad' => 'required|numeric',
+            'motivo' => 'required|string',
             'fecha' => 'required',
         ]);
 

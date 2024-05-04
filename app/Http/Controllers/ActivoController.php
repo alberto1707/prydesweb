@@ -42,9 +42,9 @@ class ActivoController extends Controller
     {
         //validacion del lado del servidor
         $request->validate([
-            'nombre' => 'required|string',
+            'nombre' => 'required|string|max:150',
             'descripcion' => 'required|string',
-            'cantidad_inicial' => 'required',
+            'cantidad_inicial' => 'required|numeric',
         ]);
 
         //Generar el codigo del activo
@@ -109,7 +109,7 @@ class ActivoController extends Controller
     {
         //validacion
         $request->validate([
-            'nombre' => 'required|string',
+            'nombre' => 'required|string|max:150',
             'descripcion' => 'required|string',
         ]);
 

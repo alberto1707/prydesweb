@@ -11,6 +11,10 @@
             <a href="{{ route('activos.create') }}" class="btn btn-primary">Agregar Activo</a>
         </div>
 
+        <div class="form-group">
+            <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Buscar...">
+        </div>
+
         <table class="table table-striped">
             <thead class="thead-dark">
                 <tr>
@@ -21,7 +25,7 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tablaActivos">
                 @php($numeracion = 1)
                 @foreach ($activos as $activo)
                     <tr>
@@ -45,5 +49,27 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+         document.getElementById("buscar").addEventListener("input", function() {
+            var input, filtro, tabla, tr, td, i, txtValor;
+            input = document.getElementById("buscar");
+            filtro = input.value.toUpperCase();
+            tabla = document.getElementById("tablaActivos");
+            tr = tabla.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValor = td.textContent || td.innerText;
+                    if (txtValor.toUpperCase().indexOf(filtro) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        });
+    </script>
 
 @endsection
