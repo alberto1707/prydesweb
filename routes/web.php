@@ -16,7 +16,7 @@ use App\Http\Controllers\BajaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('activos.index');
 });
 
 Route::resource('activos', ActivoController::class);
