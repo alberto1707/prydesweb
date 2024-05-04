@@ -54,15 +54,18 @@
          document.getElementById("buscar").addEventListener("input", function() {
             var input, filtro, tabla, tr, td, i, txtValor;
             input = document.getElementById("buscar");
-            filtro = input.value.toUpperCase();
+            filtroNombre = input.value.toUpperCase();
+            filtroCodigo = input.value.toUpperCase();
             tabla = document.getElementById("tablaActivos");
             tr = tabla.getElementsByTagName("tr");
 
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[2];
-                if (td) {
-                    txtValor = td.textContent || td.innerText;
-                    if (txtValor.toUpperCase().indexOf(filtro) > -1) {
+                nombreTd = tr[i].getElementsByTagName("td")[2];
+                codigoTd = tr[i].getElementsByTagName("td")[1];
+                if (nombreTd || codigoTd) {
+                    var nombreValor = nombreTd.textContent || nombreTd.innerText;
+                    var codigoValor = codigoTd.textContent || codigoTd.innerText;
+                    if (nombreValor.toUpperCase().indexOf(filtroNombre) > -1 || codigoValor.toUpperCase().indexOf(filtroCodigo) > -1) {
                         tr[i].style.display = "";
                     } else {
                         tr[i].style.display = "none";
