@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activo;
+use App\Models\Baja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -16,8 +17,9 @@ class ActivoController extends Controller
     public function index()
     {
         $activos = Activo::all();
+        $bajas = Baja::all();
 
-        return view('activos.index', ['activos' => $activos]);
+        return view('activos.index', ['activos' => $activos, 'bajas' => $bajas]);
     }
 
     /**

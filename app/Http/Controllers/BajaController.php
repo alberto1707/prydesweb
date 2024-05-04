@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Baja;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BajaController extends Controller
 {
@@ -22,9 +23,9 @@ class BajaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($activo_id)
     {
-        //
+        return view('bajas.create', ["activo_id" => $activo_id]);
     }
 
     /**
@@ -35,7 +36,25 @@ class BajaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validacion del lado del servidor
+        $request->validate([
+            'cantidad' => 'required',
+            'motivo' => 'required',
+            'fecha' => 'required',
+        ]);
+
+        //Almacenar en la base de datos
+        $baja = new Baja();
+
+        $baja->cantidad = $request->cantidad;
+        $baja->activo_id = $request->activo_id;
+        $baja->motivo = $request->motivo;
+        $baja->fecha = $request->fecha;
+
+        $baja->save();
+
+        //redireccionar a la lista de activos
+        return Redirect::to('activos');
     }
 
     /**

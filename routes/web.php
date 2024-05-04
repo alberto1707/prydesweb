@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivoController;
+use App\Http\Controllers\BajaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,6 @@ Route::get('/', function () {
 });
 
 Route::resource('activos', ActivoController::class);
+//Route::resource('bajas', BajaController::class);
+Route::get('bajas/create/{activo_id}', [BajaController::class, 'create'])->name('bajas.create');
+Route::post('bajas', [BajaController::class, 'store'])->name('bajas.store');
